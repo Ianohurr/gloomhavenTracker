@@ -6,13 +6,13 @@ import { withStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-const styles = theme => ({
+const styles = (theme) => ({
   mainContainer: {
     [theme.breakpoints.down("sm")]: {
       width: "700px",
       margin: "auto",
       padding: "20px",
-      overflow: "auto"
+      overflow: "auto",
     },
     width: "1200px",
     margin: "auto",
@@ -20,21 +20,21 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    overflow: "auto"
+    overflow: "auto",
   },
   searchContainer: {
     width: "100%",
     display: "flex",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
 
 const theme = createMuiTheme({
   centeringContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
 
 class App extends React.Component {
@@ -42,11 +42,29 @@ class App extends React.Component {
     super(props);
     this.state = {
       characterCards: [],
-      monsterCards: []
+      monsterCards: [],
+      monsterNumber: 0,
     };
   }
+
+  destroyMonster = (key) => {
+    console.log(this.state.monsterCards);
+    console.log(key);
+    console.log("dleteeeeee");
+    var monsterCardsCopy = this.state.monsterCards;
+    console.log(key);
+    monsterCardsCopy.splice(key, 1);
+    this.setState(
+      {
+        monsterCards: monsterCardsCopy,
+      },
+      console.log(this.state.monsterCards)
+    );
+    var slatt = this.state.monsterNumber;
+    slatt--;
+    this.setState({ monsterNumber: slatt });
+  };
   addCharacter = () => {
-    console.log("adding character");
     var characterCardsCopy = this.state.characterCards;
     characterCardsCopy.push(<CharacterCard />);
     console.log(characterCardsCopy);
@@ -54,10 +72,17 @@ class App extends React.Component {
   };
 
   addMonster = () => {
-    console.log("adding monster");
     var monsterCardsCopy = this.state.monsterCards;
-    monsterCardsCopy.push(<MonsterCard />);
-    console.log(monsterCardsCopy);
+    monsterCardsCopy.push(
+      <MonsterCard
+        destroyMonster={this.destroyMonster}
+        key={this.state.monsterNumber}
+        otherKey={this.state.monsterNumber}
+      />
+    );
+    var slatt = this.state.monsterNumber;
+    slatt++;
+    this.setState({ monsterNumber: slatt });
     this.setState({ monsterCards: monsterCardsCopy });
   };
 
@@ -69,7 +94,7 @@ class App extends React.Component {
           <div className={classes.searchContainer}>
             <h1>Characters</h1>
           </div>
-          {this.state.characterCards.map(character => {
+          {this.state.characterCards.map((character) => {
             return character;
           })}
           <Button
@@ -83,7 +108,7 @@ class App extends React.Component {
           <div className={classes.searchContainer}>
             <h1>Monsters</h1>
           </div>
-          {this.state.monsterCards.map(monster => {
+          {this.state.monsterCards.map((monster) => {
             return monster;
           })}
           <Button

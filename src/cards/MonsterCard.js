@@ -16,20 +16,20 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-const styles = theme => ({
+const styles = (theme) => ({
   characterCard: {
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-      height: "460px",
-      marginBottom: "20px"
+      height: "550px",
+      marginBottom: "20px",
     },
     width: "60%",
-    height: "460px",
+    height: "550px",
     padding: "10px",
-    marginBottom: "20px"
+    marginBottom: "20px",
   },
   inactiveCard: {
-    height: "100%"
+    height: "100%",
     // background:
     //   "linear-gradient(90deg, rgba(163,166,61,1) 34%, rgba(227,217,166,1) 88%)"
   },
@@ -38,26 +38,26 @@ const styles = theme => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   plusIcon: {
-    fontSize: "100px"
+    fontSize: "100px",
   },
   characterImage: {
     width: "90%",
     backgroundColor: "red",
     height: "250px",
-    marginTop: "10px"
+    marginTop: "10px",
   },
   buttonContainer: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   subtitle: {
-    margin: "10px"
+    margin: "10px",
   },
   inactiveContainer: {
-    height: "100%"
+    height: "100%",
   },
   centeringContainer: theme.centeringContainer,
   characterOption: {
@@ -65,20 +65,20 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "center",
     padding: "5px",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   characterOptionTitle: {
-    margin: "0px"
+    margin: "0px",
   },
   characterOptionDivider: {
-    width: "80%"
+    width: "80%",
   },
   topContainer: {
     height: "80%",
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
   bottomContainer: {
     display: "flex",
@@ -86,14 +86,14 @@ const styles = theme => ({
     height: "20%",
     width: "100%",
     alignItems: "flex-end",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   setButtonContainer: {
     display: "flex",
     alignItems: "center",
     width: "40%",
     height: "100%",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   curseContainer: {
     display: "flex",
@@ -101,14 +101,24 @@ const styles = theme => ({
     height: "100%",
     padding: "10px",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   checkRoot: {
-    paddingLeft: "50px"
+    paddingLeft: "50px",
   },
   revertButtonRoot: {
-    width: "200px"
-  }
+    width: "200px",
+  },
+  topPart: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+  },
+  xButton: {
+    marginLeft: "auto",
+  },
 });
 
 class MonsterCard extends React.Component {
@@ -128,13 +138,13 @@ class MonsterCard extends React.Component {
         disarm: false,
         stun: false,
         muddle: false,
-        curse: false
+        curse: false,
       },
       set: false,
       enemyInput: "Inox Guard",
       enemyNumber: 1,
       enemyNumberInput: 1,
-      elite: false
+      elite: false,
     };
     this.baseStats = null;
   }
@@ -146,7 +156,7 @@ class MonsterCard extends React.Component {
 
   createCharacterOptions = () => {
     console.log(Object.keys(characters));
-    Object.keys(characters).map(character => {
+    Object.keys(characters).map((character) => {
       return (
         <Grid item xs={3}>
           <Paper variant="outlined">
@@ -167,19 +177,20 @@ class MonsterCard extends React.Component {
       name: character.name,
       character: character,
       health: character.health[1][type],
+      range: character.range[1][type],
       movement: character.movement[1][type],
       attack: character.attack[1][type],
       specialAbilities: character.specialAbilities[1][type],
       type: type,
-      curses: {}
+      curses: {},
     });
     this.baseStats = {
       movement: character.movement[1][type],
-      attack: character.attack[1][type]
+      attack: character.attack[1][type],
     };
   };
 
-  handleLevelChange = e => {
+  handleLevelChange = (e) => {
     console.log(e);
     console.log(e.target);
     this.setState({
@@ -189,32 +200,36 @@ class MonsterCard extends React.Component {
       attack: this.state.character.attack[e.target.value][this.state.type],
       specialAbilities: this.state.character.specialAbilities[e.target.value][
         this.state.type
-      ]
+      ],
     });
   };
 
-  handleInitiativeChange = e => {
+  handleInitiativeChange = (e) => {
     this.setState({ initiative: e.target.value });
   };
 
-  handleRadioChange = curse => {
+  handleRadioChange = (curse) => {
     var curseCopy = this.state.curses;
     curseCopy[curse] = !this.state.curses[curse];
     this.setState({ curses: curseCopy });
   };
 
-  handleEnemyChange = e => {
+  handleEnemyChange = (e) => {
     this.setState({ enemyInput: e.target.value, character: e.target.value });
   };
-  handleEnemyNumberChange = e => {
+  handleEnemyNumberChange = (e) => {
     this.setState({
       enemyNumber: e.target.value,
-      enemyNumberInput: e.target.value
+      enemyNumberInput: e.target.value,
     });
   };
 
+  handleDelete = () => {
+    this.props.destroyMonster(this.props.otherKey);
+  };
+
   getEnemyList = () => {
-    Object.keys(monsters).forEach(monster => {
+    Object.keys(monsters).forEach((monster) => {
       return (
         <MenuItem value={monsters[monster].name}>
           {monsters[monster].name}
@@ -228,9 +243,15 @@ class MonsterCard extends React.Component {
       console.log(this.state);
       return (
         <div className={classes.activeCard}>
-          <h4 className={classes.characterOptionTitle}>{`${this.state.name} ${
-            this.state.enemyNumber
-          } ${this.state.elite ? "(Elite)" : ""}`}</h4>
+          <div className={classes.topPart}>
+            <h4 className={classes.characterOptionTitle}>{`${this.state.name} ${
+              this.state.enemyNumber
+            } ${this.state.elite ? "(Elite)" : ""}`}</h4>
+            <h4 className={classes.xButton} onClick={() => this.handleDelete()}>
+              X
+            </h4>
+          </div>
+
           <div className={classes.topContainer}>
             <img
               src={this.state.character.imageSource}
@@ -254,6 +275,13 @@ class MonsterCard extends React.Component {
                 />
                 <RemoveIcon onClick={() => this.changeStat("attack", -1)} />
               </div>
+              <h4 className={classes.subtitle}>Range: {this.state.range}</h4>
+              <div className={classes.buttonContainer}>
+                <AddCircleOutlineIcon
+                  onClick={() => this.changeStat("range", 1)}
+                />
+                <RemoveIcon onClick={() => this.changeStat("range", -1)} />
+              </div>
               <Button
                 variant="contained"
                 color={this.state.set ? "primary" : "secondary"}
@@ -262,7 +290,7 @@ class MonsterCard extends React.Component {
                   width: "200px",
                   height: "100px",
                   marginTop: "20px",
-                  marginBottom: "20px"
+                  marginBottom: "20px",
                 }}
                 onClick={() => this.setState({ set: !this.state.set })}
               >
@@ -279,7 +307,7 @@ class MonsterCard extends React.Component {
                 onClick={() =>
                   this.setState({
                     attack: this.baseStats.attack,
-                    movement: this.baseStats.movement
+                    movement: this.baseStats.movement,
                   })
                 }
                 variant="contained"
@@ -376,7 +404,7 @@ class MonsterCard extends React.Component {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <h4 className={classes.subtitle}>Health: {this.state.health}</h4>
@@ -392,7 +420,7 @@ class MonsterCard extends React.Component {
                 id="outlined-basic"
                 label="Initiative"
                 variant="outlined"
-                onChange={e => this.handleInitiativeChange(e)}
+                onChange={(e) => this.handleInitiativeChange(e)}
                 disabled={this.state.set}
               />
             </div>
@@ -402,7 +430,7 @@ class MonsterCard extends React.Component {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={this.state.level}
-                onChange={e => this.handleLevelChange(e)}
+                onChange={(e) => this.handleLevelChange(e)}
                 label="Level"
               >
                 <MenuItem value={1}>1</MenuItem>
@@ -428,7 +456,7 @@ class MonsterCard extends React.Component {
             style={{
               flexDirection: "column ",
               display: "flex",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <h2>Add enemy</h2>
@@ -438,10 +466,10 @@ class MonsterCard extends React.Component {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={this.state.enemyInput}
-                onChange={e => this.handleEnemyChange(e)}
+                onChange={(e) => this.handleEnemyChange(e)}
                 label="Enemy"
               >
-                {Object.keys(monsters).map(monster => {
+                {Object.keys(monsters).map((monster) => {
                   console.log(monsters);
                   console.log(monsters[monster].name);
                   return (
@@ -461,7 +489,7 @@ class MonsterCard extends React.Component {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={this.state.enemyNumberInput}
-                onChange={e => this.handleEnemyNumberChange(e)}
+                onChange={(e) => this.handleEnemyNumberChange(e)}
                 label="Number"
               >
                 <MenuItem value={1}>1</MenuItem>

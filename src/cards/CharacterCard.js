@@ -16,20 +16,20 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-const styles = theme => ({
+const styles = (theme) => ({
   characterCard: {
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-      height: "460px",
-      marginBottom: "20px"
+      height: "550px",
+      marginBottom: "20px",
     },
     width: "60%",
-    height: "460px",
+    height: "550px",
     padding: "10px",
-    marginBottom: "20px"
+    marginBottom: "20px",
   },
   inactiveCard: {
-    height: "100%"
+    height: "100%",
     // background:
     //   "linear-gradient(90deg, rgba(163,166,61,1) 34%, rgba(227,217,166,1) 88%)"
   },
@@ -38,26 +38,26 @@ const styles = theme => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   plusIcon: {
-    fontSize: "100px"
+    fontSize: "100px",
   },
   characterImage: {
     width: "90%",
     backgroundColor: "red",
     height: "250px",
-    marginTop: "10px"
+    marginTop: "10px",
   },
   buttonContainer: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   subtitle: {
-    margin: "10px"
+    margin: "10px",
   },
   inactiveContainer: {
-    height: "100%"
+    height: "100%",
   },
   centeringContainer: theme.centeringContainer,
   characterOption: {
@@ -65,20 +65,20 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "center",
     padding: "5px",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   characterOptionTitle: {
-    margin: "0px"
+    margin: "0px",
   },
   characterOptionDivider: {
-    width: "80%"
+    width: "80%",
   },
   topContainer: {
     height: "80%",
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
   bottomContainer: {
     display: "flex",
@@ -86,14 +86,14 @@ const styles = theme => ({
     height: "20%",
     width: "100%",
     alignItems: "flex-end",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   setButtonContainer: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     width: "40%",
-    height: "100%"
+    height: "100%",
   },
   curseContainer: {
     display: "flex",
@@ -101,11 +101,11 @@ const styles = theme => ({
     height: "100%",
     padding: "10px",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   checkRoot: {
-    paddingLeft: "50px"
-  }
+    paddingLeft: "50px",
+  },
 });
 
 class CharacterCard extends React.Component {
@@ -125,9 +125,9 @@ class CharacterCard extends React.Component {
         disarm: false,
         stun: false,
         muddle: false,
-        curse: false
+        curse: false,
       },
-      set: false
+      set: false,
     };
   }
 
@@ -138,7 +138,7 @@ class CharacterCard extends React.Component {
 
   createCharacterOptions = () => {
     console.log(Object.keys(characters));
-    Object.keys(characters).map(character => {
+    Object.keys(characters).map((character) => {
       return (
         <Grid item xs={3}>
           <Paper variant="outlined">
@@ -150,30 +150,30 @@ class CharacterCard extends React.Component {
     });
   };
 
-  activateSelectedCharacter = character => {
+  activateSelectedCharacter = (character) => {
     this.setState({
       activeCharacter: true,
       name: character.name,
       character: character,
       health: character.health[1],
-      curses: {}
+      curses: {},
     });
   };
 
-  handleLevelChange = e => {
+  handleLevelChange = (e) => {
     console.log(e);
     console.log(e.target);
     this.setState({
       level: e.target.value,
-      health: this.state.character.health[e.target.value]
+      health: this.state.character.health[e.target.value],
     });
   };
 
-  handleInitiativeChange = e => {
+  handleInitiativeChange = (e) => {
     this.setState({ initiative: e.target.value });
   };
 
-  handleRadioChange = curse => {
+  handleRadioChange = (curse) => {
     var curseCopy = this.state.curses;
     curseCopy[curse] = !this.state.curses[curse];
     this.setState({ curses: curseCopy });
@@ -298,7 +298,7 @@ class CharacterCard extends React.Component {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <h4 className={classes.subtitle}>Health: {this.state.health}</h4>
@@ -314,7 +314,7 @@ class CharacterCard extends React.Component {
                 id="outlined-basic"
                 label="Initiative"
                 variant="outlined"
-                onChange={e => this.handleInitiativeChange(e)}
+                onChange={(e) => this.handleInitiativeChange(e)}
                 disabled={this.state.set}
               />
             </div>
@@ -324,7 +324,7 @@ class CharacterCard extends React.Component {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={this.state.level}
-                onChange={e => this.handleLevelChange(e)}
+                onChange={(e) => this.handleLevelChange(e)}
                 label="Level"
               >
                 <MenuItem value={1}>1</MenuItem>
@@ -350,7 +350,7 @@ class CharacterCard extends React.Component {
             <h2>Add character</h2>
           </div>
           <Grid container className={classes.inactiveContainer} spacing={2}>
-            {Object.keys(characters).map(character => {
+            {Object.keys(characters).map((character) => {
               console.log(characters[character].imageSource);
               return (
                 <Grid item xs={3} key={characters[character].name}>
@@ -368,7 +368,7 @@ class CharacterCard extends React.Component {
                       style={{
                         height: "100px",
                         width: "70%",
-                        margin: "10px 0px"
+                        margin: "10px 0px",
                       }}
                     />
                   </Paper>

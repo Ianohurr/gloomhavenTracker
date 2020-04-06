@@ -1,5 +1,23 @@
 const monsters = {
   InoxGuard: {
+    range: {
+      0: {
+        normal: 0,
+        elite: 0,
+      },
+      1: {
+        normal: 0,
+        elite: 0,
+      },
+      2: {
+        normal: 0,
+        elite: 0,
+      },
+      3: {
+        normal: 0,
+        elite: 0,
+      },
+    },
     health: {
       0: {
         normal: 5,
@@ -65,6 +83,24 @@ const monsters = {
       "https://images-na.ssl-images-amazon.com/images/I/71ueiZlJEmL._AC_SL1500_.jpg",
   },
   InoxArcher: {
+    range: {
+      0: {
+        normal: 2,
+        elite: 3,
+      },
+      1: {
+        normal: 3,
+        elite: 4,
+      },
+      2: {
+        normal: 3,
+        elite: 4,
+      },
+      3: {
+        normal: 3,
+        elite: 4,
+      },
+    },
     health: {
       0: {
         normal: 5,
@@ -130,6 +166,24 @@ const monsters = {
       "https://images-na.ssl-images-amazon.com/images/I/71ueiZlJEmL._AC_SL1500_.jpg",
   },
   InoxShaman: {
+    range: {
+      0: {
+        normal: 3,
+        elite: 3,
+      },
+      1: {
+        normal: 3,
+        elite: 3,
+      },
+      2: {
+        normal: 3,
+        elite: 3,
+      },
+      3: {
+        normal: 4,
+        elite: 4,
+      },
+    },
     health: {
       0: {
         normal: 4,
