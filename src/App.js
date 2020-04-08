@@ -47,13 +47,24 @@ class App extends React.Component {
     };
   }
 
-  destroyMonster = (key) => {
+  destroyMonster = (deleteKey) => {
     console.log(this.state.monsterCards);
-    console.log(key);
+    console.log(deleteKey);
     console.log("dleteeeeee");
     var monsterCardsCopy = this.state.monsterCards;
-    console.log(key);
-    monsterCardsCopy.splice(key, 1);
+    console.log(deleteKey);
+    // monsterCardsCopy.forEach(monster=>{
+    //   if(monster.key===key){
+
+    //   }
+    // })
+    for (var x = 0; x < monsterCardsCopy.length; x++) {
+      console.log(monsterCardsCopy[x].key);
+      if (monsterCardsCopy[x].key === deleteKey.toString()) {
+        console.log("destroying monster");
+        monsterCardsCopy.splice(x, 1);
+      }
+    }
     this.setState(
       {
         monsterCards: monsterCardsCopy,

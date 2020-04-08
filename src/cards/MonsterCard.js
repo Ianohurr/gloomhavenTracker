@@ -118,6 +118,7 @@ const styles = (theme) => ({
   },
   xButton: {
     marginLeft: "auto",
+    cursor: "pointer",
   },
 });
 
@@ -193,15 +194,19 @@ class MonsterCard extends React.Component {
   handleLevelChange = (e) => {
     console.log(e);
     console.log(e.target);
-    this.setState({
-      level: e.target.value,
-      health: this.state.character.health[e.target.value][this.state.type],
-      movement: this.state.character.movement[e.target.value][this.state.type],
-      attack: this.state.character.attack[e.target.value][this.state.type],
-      specialAbilities: this.state.character.specialAbilities[e.target.value][
-        this.state.type
-      ],
-    });
+    if (e.target.value <= 3) {
+      this.setState({
+        level: e.target.value,
+        health: this.state.character.health[e.target.value][this.state.type],
+        movement: this.state.character.movement[e.target.value][
+          this.state.type
+        ],
+        attack: this.state.character.attack[e.target.value][this.state.type],
+        specialAbilities: this.state.character.specialAbilities[e.target.value][
+          this.state.type
+        ],
+      });
+    }
   };
 
   handleInitiativeChange = (e) => {
@@ -436,12 +441,12 @@ class MonsterCard extends React.Component {
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
+                {/* <MenuItem value={4}>4</MenuItem>
                 <MenuItem value={5}>5</MenuItem>
                 <MenuItem value={6}>6</MenuItem>
                 <MenuItem value={7}>7</MenuItem>
                 <MenuItem value={8}>8</MenuItem>
-                <MenuItem value={9}>9</MenuItem>
+                <MenuItem value={9}>9</MenuItem> */}
               </Select>
             </FormControl>
           </div>
